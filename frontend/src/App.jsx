@@ -1,18 +1,18 @@
 import { useState, useEffect } from 'react';
-import { Brain, Package } from 'lucide-react';
+import { Brain, Package, Lock } from 'lucide-react';
 import EventInput from './components/EventInput';
 import ReportDisplay from './components/ReportDisplay';
 import ChainStatus from './components/ChainStatus';
 import apiService from './services/api';
-// Wallet UI is currently disabled (not used). If you want to re-enable,
-// uncomment the import below and the component usage in the header.
 import WalletConnect from './components/WalletConnect';
+import { useCurrentAccount } from '@mysten/dapp-kit';
 
 function App() {
   const [result, setResult] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [oracleStatus, setOracleStatus] = useState(null);
   const [error, setError] = useState(null);
+  const currentAccount = useCurrentAccount();
 
   // Fetch oracle status on mount
   useEffect(() => {
@@ -67,7 +67,7 @@ function App() {
                 AI-Powered Logistics Intelligence on Blockchain
               </p>
             </div>
-            {/* <WalletConnect /> */}
+            {currentAccount && <WalletConnect />}
           </div>
         </div>
       </header>
@@ -104,18 +104,31 @@ function App() {
 
           {/* Main Content Area */}
           <div className="main-content">
-            <EventInput 
-              onSubmit={handleSubmitEvent} 
-              isLoading={isLoading}
-            />
+            {currentAccount ? (
+              <>
+                <EventInput 
+                  onSubmit={handleSubmitEvent} 
+                  isLoading={isLoading}
+                />
 
-            {error && (
-              <div className="error-banner">
-                <span>⚠️ {error}</span>
+                {error && (
+                  <div className="error-banner">
+                    <span>⚠️ {error}</span>
+                  </div>
+                )}
+
+                <ReportDisplay result={result} />
+              </>
+            ) : (
+              <div className="card connect-wallet-prompt">
+                <div className="connect-wallet-content">
+                  <Lock size={48} className="lock-icon" />
+                  <h2>Connect Your Wallet</h2>
+                  <p>Please connect your wallet to access the AI report generation system.</p>
+                  <WalletConnect />
+                </div>
               </div>
             )}
-
-            <ReportDisplay result={result} />
           </div>
         </div>
       </main>

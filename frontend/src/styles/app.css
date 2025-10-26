@@ -55,6 +55,40 @@ body {
   display: flex;
   align-items: center;
   gap: 1rem;
+  position: relative;
+}
+
+.wallet-container {
+  position: relative;
+  margin-left: auto;
+}
+
+.connect-wallet-prompt {
+  text-align: center;
+  padding: 4rem 2rem;
+}
+
+.connect-wallet-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.connect-wallet-content .lock-icon {
+  color: var(--text-secondary);
+  opacity: 0.7;
+}
+
+.connect-wallet-content h2 {
+  font-size: 1.75rem;
+  margin: 0;
+}
+
+.connect-wallet-content p {
+  color: var(--text-secondary);
+  margin: 0;
+  max-width: 400px;
 }
 
 .logo {
