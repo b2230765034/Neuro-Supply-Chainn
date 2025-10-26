@@ -1,0 +1,19 @@
+# Core dependencies
+python-dotenv==1.0.0
+requests==2.31.0
+httpx==0.26.0
+
+# Cryptography
+cryptography==41.0.7
+pynacl==1.5.0
+
+# Sui interaction
+pysui==0.51.0
+
+# Optional: Web framework for production
+fastapi==0.104.1
+uvicorn==0.24.0
+pydantic==2.5.0
+
+# Utilities
+python-json-logger==2.0.7
